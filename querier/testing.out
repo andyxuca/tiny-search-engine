@@ -1,0 +1,272 @@
+bash -v testing.sh
+module () {  _module_raw "$@" 2>&1
+}
+ml () {  module ml "$@"
+}
+_module_raw () {  eval `/usr/bin/tclsh8.6 /usr/lib/x86_64-linux-gnu/modulecmd.tcl bash "$@"`;
+ _mlstatus=$?;
+ return $_mlstatus
+}
+# testing.h     Andy Xu      May 12 2023
+#
+# Description: tester for querier
+
+# no arguments
+./querier
+Error: wrong number of arguments. Must only have two arguments: pageDirectory and indexFilename.
+# one argument
+./querier 1
+Error: wrong number of arguments. Must only have two arguments: pageDirectory and indexFilename.
+# three arguments
+./querier 1 2 3
+Error: wrong number of arguments. Must only have two arguments: pageDirectory and indexFilename.
+# more than three arguments
+./querier 1 2 3 4
+Error: wrong number of arguments. Must only have two arguments: pageDirectory and indexFilename.
+# invalid pageDirectory (non-existent path)
+./querier ../nonexistentPath ../index_files/1
+Error: pageDirectory is invalid, either does not exist or is not crawler produced.
+# invalid pageDirectory (not a crawler directory)
+./querier ../indexer ../index_files/1
+Error: pageDirectory is invalid, either does not exist or is not crawler produced.
+# invalid indexFile (non-existent path)
+./querier ~/cs50-dev/shared/tse/output/letters-1 ../nonexistentPath/1
+Error: indexFilename is invalid.
+# test various query commands in bash file
+./querier ~/cs50-dev/shared/tse/output/wikipedia_2 ~/cs50-dev/shared/tse/indices/wikipedia_2.ndx < queryCommands
+first or last word cannot be an operator
+first or last word cannot be an operator
+first or last word cannot be an operator
+first or last word cannot be an operator
+first or last word cannot be an operator
+first or last word cannot be an operator
+operators cannot be adjacent to each other
+operators cannot be adjacent to each other
+Query: this is to test scrape
+0
+No documents match.
+------------------------------
+Query: a voice in the wilderness and linked lists
+0
+No documents match.
+------------------------------
+Query: a voice in the wilderness or linked lists
+81
+Matches 81 documents (ranked):
+score 95  doc 2: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Linked_list.html
+score 95  doc 76: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Tail-sharing.html
+score 17  doc 48: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Skip_list.html
+score 14  doc 45: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Self-organizing_list.html
+score 13  doc 74: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lisp_programming_language.html
+score 13  doc 85: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Unrolled_linked_list.html
+score 13  doc 101: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lisp_(programming_language).html
+score 13  doc 106: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/LISP.html
+score 10  doc 203: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Table_(computing).html
+score 8  doc 95: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dynamic_array.html
+score 8  doc 98: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/XOR_linked_list.html
+score 8  doc 99: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Doubly_linked_list.html
+score 7  doc 28: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Disjoint-set_data_structure.html
+score 6  doc 35: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Collection_(abstract_data_type).html
+score 6  doc 75: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Persistent_data_structure.html
+score 6  doc 128: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Hash_table.html
+score 5  doc 21: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Tree_(data_structure).html
+score 5  doc 22: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Association_list.html
+score 4  doc 55: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Cons.html
+score 4  doc 84: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/CDR_coding.html
+score 4  doc 97: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Null_pointer.html
+score 4  doc 115: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Information_Processing_Language.html
+score 4  doc 121: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Array_data_structure.html
+score 3  doc 23: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Linked_data_structure.html
+score 3  doc 54: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Car_and_cdr-2.html
+score 3  doc 60: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Serialization.html
+score 3  doc 61: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Free_list.html
+score 3  doc 63: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Array_data_type.html
+score 3  doc 78: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Merge_algorithm.html
+score 3  doc 90: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Heapsort.html
+score 3  doc 94: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Self-balancing_binary_search_tree.html
+score 3  doc 96: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Sentinel_node.html
+score 3  doc 100: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/CAR_and_CDR.html
+score 2  doc 6: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Graph_(abstract_data_type).html
+score 2  doc 13: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Fibonacci_heap.html
+score 2  doc 29: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Set_(abstract_data_type).html
+score 2  doc 32: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Double-ended_queue.html
+score 2  doc 44: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/International_Standard_Book_Number.html
+score 2  doc 49: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Queue_(data_structure).html
+score 2  doc 53: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Linear_search.html
+score 2  doc 57: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Programming_language.html
+score 2  doc 58: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Big-O_notation.html
+score 2  doc 66: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Sentinel_value.html
+score 2  doc 122: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/S-expression.html
+score 2  doc 124: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Queue_(abstract_data_type).html
+score 2  doc 133: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/International_Standard_Serial_Number.html
+score 2  doc 149: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/C%2b%2b11.html
+score 2  doc 156: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Python_(programming_language).html
+score 2  doc 157: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Set_data_structure.html
+score 2  doc 161: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Perl.html
+score 2  doc 163: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/String_(computing).html
+score 2  doc 196: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Prime_number.html
+score 2  doc 208: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Big_O_notation.html
+score 2  doc 211: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Hash_list.html
+score 1  doc 8: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Trie.html
+score 1  doc 14: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Binomial_heap.html
+score 1  doc 17: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Red%e2%80%93black_tree.html
+score 1  doc 18: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/AA_tree.html
+score 1  doc 27: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Bit_array.html
+score 1  doc 31: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Multimap.html
+score 1  doc 34: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Container_(abstract_data_type).html
+score 1  doc 39: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Digital_object_identifier.html
+score 1  doc 51: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Skew_binary_number_system.html
+score 1  doc 56: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Functional_programming_language.html
+score 1  doc 70: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Time_sharing.html
+score 1  doc 71: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/FIFO_(computing).html
+score 1  doc 79: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Recursion.html
+score 1  doc 80: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Red-black_tree.html
+score 1  doc 87: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Boolean_value.html
+score 1  doc 120: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Random_access.html
+score 1  doc 126: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Abstract_data_type.html
+score 1  doc 139: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Bloom_filter.html
+score 1  doc 154: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Ruby_(programming_language).html
+score 1  doc 155: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/JavaScript.html
+score 1  doc 158: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dbm.html
+score 1  doc 160: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/PHP.html
+score 1  doc 174: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Java_(programming_language).html
+score 1  doc 198: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Mask_(computing).html
+score 1  doc 210: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Hash_tree_(disambiguation).html
+score 1  doc 212: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dartmouth_College.html
+score 1  doc 255: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Swarthmore_College.html
+------------------------------
+Query: dartmouth
+51
+Matches 51 documents (ranked):
+score 416  doc 212: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dartmouth_College.html
+score 18  doc 251: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/ECAC_Hockey.html
+score 15  doc 40: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Thomas_H.html
+score 12  doc 114: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Artificial_intelligence.html
+score 4  doc 245: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/St-2.html
+score 3  doc 234: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/TD_Bank_Sports_Center.html
+score 3  doc 235: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Hobey_Baker_Memorial_Rink.html
+score 3  doc 236: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Bright_Hockey_Center.html
+score 3  doc 242: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Union_Dutchmen_ice_hockey.html
+score 3  doc 243: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Union_Dutchmen.html
+score 3  doc 244: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/St-3.html
+score 3  doc 246: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/St.html
+score 2  doc 70: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Time_sharing.html
+score 2  doc 136: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Clifford_Stein.html
+score 2  doc 218: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Keene_State_College.html
+score 2  doc 221: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Saint_Anselm_College.html
+score 2  doc 225: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lebanon_College.html
+score 2  doc 230: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Ingalls_Rink.html
+score 2  doc 231: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Achilles_Rink.html
+score 2  doc 232: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Appleton_Arena.html
+score 2  doc 233: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Houston_Field_House.html
+score 2  doc 237: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lynah_Rink.html
+score 2  doc 238: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Starr_Arena.html
+score 2  doc 239: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Cheel_Arena.html
+score 2  doc 240: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Meehan_Auditorium.html
+score 2  doc 241: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Union_Dutchwomen_ice_hockey.html
+score 2  doc 247: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Rensselaer_Engineers.html
+score 2  doc 248: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Quinnipiac_Bobcats.html
+score 2  doc 250: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Clarkson_Golden_Knights.html
+score 2  doc 252: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/The_College_of_William_%26_Mary.html
+score 2  doc 255: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Swarthmore_College.html
+score 1  doc 1: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/
+score 1  doc 74: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lisp_programming_language.html
+score 1  doc 101: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lisp_(programming_language).html
+score 1  doc 106: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/LISP.html
+score 1  doc 119: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Allen_Newell.html
+score 1  doc 213: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/White_Mountains_Community_College.html
+score 1  doc 214: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/New_Hampshire_Technical_Institute.html
+score 1  doc 215: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Nashua_Community_College.html
+score 1  doc 216: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Manchester_Community_College_(New_Hampshire).html
+score 1  doc 217: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Community_College_System_of_New_Hampshire.html
+score 1  doc 219: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Granite_State_College.html
+score 1  doc 220: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Thomas_More_College_of_Liberal_Arts.html
+score 1  doc 222: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/New_Hampshire_Institute_of_Art.html
+score 1  doc 223: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/New_England_College.html
+score 1  doc 224: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Mount_Washington_College.html
+score 1  doc 226: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Daniel_Webster_College.html
+score 1  doc 227: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/The_College_of_Saint_Mary_Magdalen.html
+score 1  doc 228: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Colby%e2%80%93Sawyer_College.html
+score 1  doc 253: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Williams_College.html
+score 1  doc 254: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Wellesley_College.html
+------------------------------
+Query: dartmouth and wilderness and linked lists or seal and society
+7
+Matches 7 documents (ranked):
+score 7  doc 212: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dartmouth_College.html
+score 5  doc 221: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Saint_Anselm_College.html
+score 5  doc 243: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Union_Dutchmen.html
+score 1  doc 220: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Thomas_More_College_of_Liberal_Arts.html
+score 1  doc 246: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/St.html
+score 1  doc 250: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Clarkson_Golden_Knights.html
+score 1  doc 110: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Machine_translation.html
+------------------------------
+
+
+# test using fuzzquery
+./fuzzquery ~/cs50-dev/shared/tse/indices/wikipedia_2.ndx 10 0 | ./querier ~/cs50-dev/shared/tse/output/wikipedia_2 ~/cs50-dev/shared/tse/indices/wikipedia_2.ndx
+./fuzzquery: generating 10 queries from 27847 words
+Query: bushy and daemontools
+0
+No documents match.
+------------------------------
+Query: ninja or conference vefp or alignment correction
+2
+Matches 2 documents (ranked):
+score 3  doc 233: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Houston_Field_House.html
+score 1  doc 156: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Python_(programming_language).html
+------------------------------
+Query: enotifrevealaddr madam or versailles
+2
+Matches 2 documents (ranked):
+score 1  doc 112: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/UNESCO.html
+score 1  doc 163: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/String_(computing).html
+------------------------------
+Query: endlessly tso billion or whatever or curdled or inadvertently
+6
+Matches 6 documents (ranked):
+score 2  doc 149: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/C%2b%2b11.html
+score 1  doc 56: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Functional_programming_language.html
+score 1  doc 92: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Fragmentation_(computer).html
+score 1  doc 140: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Pearson_hashing.html
+score 1  doc 135: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Karl_Pearson.html
+score 1  doc 163: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/String_(computing).html
+------------------------------
+Query: leonidas or sapi presidents libawka and atlantis or stoica
+5
+Matches 5 documents (ranked):
+score 2  doc 17: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Red%e2%80%93black_tree.html
+score 2  doc 80: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Red-black_tree.html
+score 1  doc 38: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Donald_Knuth.html
+score 1  doc 68: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Quad-edge_data_structure.html
+score 1  doc 138: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Distributed_hash_table.html
+------------------------------
+Query: interfacing mdgs primitives attaining or grafton
+3
+Matches 3 documents (ranked):
+score 2  doc 212: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Dartmouth_College.html
+score 2  doc 213: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/White_Mountains_Community_College.html
+score 2  doc 225: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Lebanon_College.html
+------------------------------
+Query: institutionalism
+1
+Matches 1 documents (ranked):
+score 1  doc 117: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Herbert_A.html
+------------------------------
+Query: cosmopolitanism limburgs or decb
+1
+Matches 1 documents (ranked):
+score 2  doc 102: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Motorola_6800.html
+------------------------------
+Query: bohm
+1
+Matches 1 documents (ranked):
+score 1  doc 109: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Natural_language.html
+------------------------------
+Query: akamai or sheaf or bauer and beginner and supplements
+2
+Matches 2 documents (ranked):
+score 1  doc 43: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Charles_E-2.html
+score 1  doc 221: http://cs50tse.cs.dartmouth.edu/tse/wikipedia/Saint_Anselm_College.html
+------------------------------
+
